@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="container__btn">
+    <button
+      mat-raised-button
+      color="primary"
+      class="container__btn--position"
+      (click)="back()"
+      type="button"
+    >
+      Powrót
+    </button>
+    <h1 class="container__message" *ngIf="message">{{ message }}</h1>
+  </div>
+  <div class="container__info" *ngFor="let day of dayReview; let a = index">
+    <span class="container__info--day-name"
+      >Nazwa dnia: "{{ day.dayName }}" Zapisano o : "{{ hours[a] }}:{{
+        minutes[a]
+      }}"</span
+    >
+    <div class="container__meal">
+      <div
+        class="container__meal--box"
+        *ngFor="let meal of day.day; let c = index"
+      >
+        <span class="container__meal--box-name"
+          >Nazwa posiłku: {{ meal.mealName }}</span
+        >
+        <table mat-table [dataSource]="meal.meal" class="table">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Nazwa produktu</mat-header-cell>
+            <mat-cell *matCellDef="let e">{{ e.name }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef>Waga</mat-header-cell>
+            <mat-cell *matCellDef="let e">
+              {{ e.amount * 100 | number: "1.0-2" }} g
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="b">
+            <mat-header-cell *matHeaderCellDef>B</mat-header-cell>
+            <mat-cell *matCellDef="let e"
+              >{{ e.b * e.amount | number: "1.0-2" }} g</mat-cell
+            >
+          </ng-container>
+          <ng-container matColumnDef="t">
+            <mat-header-cell *matHeaderCellDef>T</mat-header-cell>
+            <mat-cell *matCellDef="let e"
+              >{{ e.t * e.amount | number: "1.0-2" }} g</mat-cell
+            >
+          </ng-container>
+          <ng-container matColumnDef="w">
+            <mat-header-cell *matHeaderCellDef>W</mat-header-cell>
+            <mat-cell *matCellDef="let e"
+              >{{ e.w * e.amount | number: "1.0-2" }} g</mat-cell
+            >
+          </ng-container>
+          <ng-container matColumnDef="kcal">
+            <mat-header-cell *matHeaderCellDef>Kalorie</mat-header-cell>
+            <mat-cell *matCellDef="let e"
+              >{{ e.kcal * e.amount | number: "1.0-2" }} kcal</mat-cell
+            >
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </table>
+        <div class="macro macro--meal">
+          <span>Macro:</span>
+          <span> B: {{ meal.macro.b | number: "1.0-2" }} g </span>
+          <span> T: {{ meal.macro.t | number: "1.0-2" }} g </span>
+          <span>
+            W:
+            {{ meal.macro.w | number: "1.0-2" }} g
+          </span>
+          <span> Suma Kcal: {{ meal.macro.kcal | number: "1.0-2" }} kcal </span>
+        </div>
+      </div>
+    </div>
+    <div class="macro">
+      <p class="macro__info">
+        Twoje zapotrzebowanie dzienne:
+        {{ day.dayInfo.userKcal | number: "1.0-2" }} kcal
+      </p>
+      <p class="macro__info">
+        Pozostało:
+        {{ day.dayInfo.userKcal - day.dayInfo.macro.kcal | number: "1.0-2" }}
+        kcal
+      </p>
+      <p class="macro__info">Macro:</p>
+      <p class="macro__info">
+        B: {{ day.dayInfo.macro.b | number: "1.0-2" }} g
+      </p>
+      <p class="macro__info">
+        T: {{ day.dayInfo.macro.t | number: "1.0-2" }} g
+      </p>
+      <p class="macro__info">
+        W:
+        {{ day.dayInfo.macro.w | number: "1.0-2" }} g
+      </p>
+      <p class="macro__info">
+        Suma Kcal: {{ day.dayInfo.macro.kcal | number: "1.0-2" }} kcal
+      </p>
+    </div>
+  </div>
+</div>

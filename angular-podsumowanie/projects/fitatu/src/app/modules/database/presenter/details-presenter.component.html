@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="searching">
+    <form class="searching__form">
+      <input
+        type="text"
+        placeholder="Szukaj nazwy produktu"
+        [formControl]="name"
+        class="searching__form--field"
+        list="hints"
+      />
+      <datalist id="hints">
+        <option
+          *ngFor="let element of datalist; let i = index"
+          value="{{ element }}"
+        ></option>
+      </datalist>
+    </form>
+  </div>
+  <div class="table">
+    <table mat-table [dataSource]="products | sorting: name.value" matSort>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Nazwa produktu</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef>Waga</mat-header-cell>
+        <mat-cell *matCellDef="let element"> 100 g </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="b">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>B</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{
+          element.macro.b + " g"
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="t">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>T</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{
+          element.macro.t + " g"
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="w">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>W</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{
+          element.macro.w + " g"
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="kcal">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Kalorie</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element">{{ element.macro.kcal }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </table>
+  </div>
+</div>

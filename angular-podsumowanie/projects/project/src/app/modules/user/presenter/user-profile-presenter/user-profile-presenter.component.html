@@ -1,0 +1,50 @@
+<mat-card class="container">
+  <mat-card-title>Profil:</mat-card-title>
+  <mat-divider inset></mat-divider>
+  <mat-card-content class="container__content">
+    <p>Nick: {{ user?.name }}</p>
+    <p>E-mail: {{ user?.email }}</p>
+    <p>Rozegrane gry:</p>
+    <ul>
+      <li *ngIf="!user?.games">Nie masz jeszcze rozegranych gier!</li>
+      <li *ngFor="let game of user?.games; let i = index">{{ game }}</li>
+    </ul>
+    <p>Punkty: {{ user?.achievements }}</p>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-content>
+    <mat-card-title class="title">Osiągnięcia:</mat-card-title>
+    <p *ngIf="!user?.achievements">Nie posiadasz żadnych osiągnięć!</p>
+    <div class="container__achievements">
+      <img
+        src="https://www.pruszkow.pl/wp-content/uploads/2019/10/5_1570180464.jpg"
+        alt="Piąteczka"
+        *ngIf="user?.achievements == 5"
+      />
+      <img
+        src="https://abiro.zgora.pl/wp-content/uploads/2019/08/gm1-1024x500.png"
+        alt="Złoty medal"
+        *ngIf="user?.achievements == 10"
+      />
+      <img
+        src="https://www.spopalenica.pl/wp-content/uploads/2019/08/puchar-1080x675.jpg"
+        alt="Złoty puchar"
+        *ngIf="user?.achievements == 25"
+      />
+      <img
+        src="https://wallpapercave.com/wp/wp2968245.png"
+        alt="Diament"
+        *ngIf="user?.achievements == 100"
+      />
+    </div>
+  </mat-card-content>
+</mat-card>
+<button
+  mat-raised-button
+  color="primary"
+  type="button"
+  (click)="onBack()"
+  class="btn-back"
+>
+  Wróć
+</button>

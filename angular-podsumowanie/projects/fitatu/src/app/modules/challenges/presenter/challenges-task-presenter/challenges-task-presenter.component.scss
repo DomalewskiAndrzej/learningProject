@@ -1,0 +1,43 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 70%;
+  height: 40%;
+  background-color: #fff;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.trophies {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  &__title {
+    text-align: center;
+  }
+}
+.footer {
+  &__btn {
+    margin: 3%;
+  }
+}
+
+img {
+  width: 100px;
+  height: 100px;
+}

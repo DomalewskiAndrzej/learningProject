@@ -1,0 +1,56 @@
+<div class="container">
+  <button
+    mat-raised-button
+    color="accent"
+    type="button"
+    class="container__btn"
+    (click)="start = !start"
+    *ngIf="!start"
+  >
+    Rozpocznij
+  </button>
+  <form [formGroup]="form" class="form">
+    <mat-form-field appearance="fill" class="form__items--margin">
+      <mat-label>Podaj nazwę gry</mat-label>
+      <input matInput formControlName="name" placeholder="Nazwa" />
+    </mat-form-field>
+    <div
+      class="form__items"
+      formArrayName="questions"
+      *ngFor="let questionControl of controlsQuestions.controls; let i = index"
+    >
+      <div [formGroupName]="i">
+        <mat-form-field appearance="fill" class="form__items--margin">
+          <mat-label>Wpisz pytanie</mat-label>
+          <input
+            matInput
+            formControlName="questionName"
+            placeholder="Pytanie"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="form__items--margin">
+          <mat-label>Podaj link do tła</mat-label>
+          <input matInput formControlName="img" placeholder="Link do tła" />
+        </mat-form-field>
+      </div>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="addAnswer()"
+      >
+        Dodaj odpowiedź
+      </button>
+    </div>
+    <div></div>
+  </form>
+</div>
+<button
+  mat-raised-button
+  color="primary"
+  type="button"
+  (click)="onBack()"
+  class="btn-back"
+>
+  Wróć
+</button>

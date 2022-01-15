@@ -1,0 +1,46 @@
+<div class="container">
+  <form [formGroup]="signupForm" class="form">
+    <h1 class="container__header">Rejestracja</h1>
+    <div class="form__info">
+      <label>Podaj e-mail</label>
+      <input
+        matInput
+        type="text"
+        placeholder="Wpisz e-mail"
+        formControlName="email"
+      />
+      <label>Podaj hasło - minimum 10 znaków</label>
+      <input
+        matInput
+        type="password"
+        placeholder="Wpisz hasło"
+        formControlName="newPassword"
+      />
+      <mat-error *ngIf="!!signupForm.controls.newPassword.errors?.minLength">
+        Podane hasło jest za krótkie!
+      </mat-error>
+      <label>Podaj ponownie hasło</label>
+      <input
+        matInput
+        type="password"
+        placeholder="Wpisz ponownie hasło"
+        formControlName="repeatedPassword"
+      />
+      <mat-error
+        *ngIf="!!signupForm.controls.repeatedPassword.errors?.mustBeSame"
+      >
+        Podane hasła są róźne!
+      </mat-error>
+    </div>
+    <div class="form__box">
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="submitSignup()"
+      >
+        Zarejestruj się
+      </button>
+    </div>
+  </form>
+</div>

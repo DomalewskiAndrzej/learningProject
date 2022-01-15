@@ -1,0 +1,157 @@
+<div class="container">
+  <div class="data">
+    <div class="card" *ngFor="let recipe of recipes">
+      <div class="card__info">
+        <img [src]="recipe.src" [alt]="recipe.alt" class="card__info--img" />
+        <h3 class="card__info--title">{{ recipe.title }}</h3>
+      </div>
+      <div class="card__button">
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="getRecipeSrc(recipe.src)"
+          [routerLink]="['details']"
+        >
+          Wyświetl przepis
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="info">
+    <h2 class="info__title">Chcesz mieć swój własny przepis ?</h2>
+    <span class="info__title info__title--click" (click)="recipeFade()"
+      >Dodaj go!</span
+    >
+  </div>
+</div>
+<div class="add" *ngIf="addRecipeFade">
+  <div class="add__container">
+    <form [formGroup]="addRecipeForm" class="add__form">
+      <label>Podaj tytuł posiłku!</label>
+      <input type="text" formControlName="title" placeholder="Tytuł posiłku" />
+      <label>Podaj link do zdjęcia!</label
+      ><input type="text" formControlName="src" placeholder="Link do zdjęcia" />
+      <label>Podaj alteratywny tekst do zdjęcia!</label>
+      <input
+        type="text"
+        formControlName="alt"
+        placeholder="Alteratywny tekst do zdjęcia"
+      />
+      <label>Podaj czas przygotowania!</label
+      ><input
+        type="number"
+        formControlName="time"
+        placeholder="Czas przygotowania"
+      />
+      <label>Podaj ilość porcji!</label>
+      <input
+        type="number"
+        formControlName="portions"
+        placeholder="Ilość porcji"
+      />
+      <div class="add__form--info add__form--flex">
+        <label>Podaj nazwę oraz wagę składnika w gramach!</label>
+        <div class="add__form--btns">
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            class="add__form--btns-flex"
+            (click)="addIngredientControls()"
+          >
+            +
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            class="add__form--btns-flex"
+            (click)="removeRecipeIngredientControls()"
+          >
+            -
+          </button>
+        </div>
+      </div>
+      <div
+        formArrayName="ingredients"
+        *ngFor="
+          let ingredientControl of controlsIngredients.controls;
+          let i = index
+        "
+      >
+        <div class="add__form--info" [formGroupName]="i">
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Nazwa składnika"
+          />
+          <input
+            type="number"
+            formControlName="weight"
+            placeholder="Waga składnika w gramach"
+          />
+        </div>
+      </div>
+      <div class="add__form--info add__form--flex">
+        <label>Opisz sposób przygotowania!</label>
+        <div class="add__form--btns">
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            class="add__form--btns-flex"
+            (click)="addDescriptionControls()"
+          >
+            +
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            class="add__form--btns-flex"
+            (click)="removeRecipeDescriptionControls()"
+          >
+            -
+          </button>
+        </div>
+      </div>
+      <div
+        class="add__form--info"
+        formArrayName="description"
+        *ngFor="
+          let descriptionControl of controlsDescription.controls;
+          let i = index
+        "
+      >
+        <input
+          type="text"
+          [formControlName]="i"
+          placeholder="Sposób przygotowania"
+          value="0"
+        />
+      </div>
+    </form>
+    <div class="add__buttons">
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        class="add__buttons--margin"
+        (click)="recipeFade()"
+      >
+        Wróć
+      </button>
+      <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        class="add__buttons--margin"
+        (click)="addRecipe()"
+      >
+        Dodaj przepis
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="container">
+  <button
+    mat-raised-button
+    color="primary"
+    class="btn btn--previous"
+    (click)="previousMonth()"
+    type="button"
+  >
+    &lt;&lt;
+  </button>
+  <span class="month">{{ month.monthString }} {{ month.year }}</span>
+  <div class="container__header">
+    <div
+      class="day-of-the-week"
+      *ngFor="let element of dayOfTheWeek; let i = index"
+    >
+      {{ element }}
+    </div>
+  </div>
+  <div class="container__cell">
+    <div
+      class="day"
+      id="day{{ i }}"
+      #div
+      *ngFor="let element of calendar; let i = index"
+      [ngClass]="getClass(element, i)"
+    >
+      <span class="day__number-of-day">{{ element.day }}</span>
+      <span class="day__info" *ngIf="element.message">{{
+        element.message
+      }}</span>
+      <span
+        class="day__info day__info--details"
+        (click)="dayInfo(i)"
+        *ngIf="element.message == 'Dostępny dzień'"
+        >Podgląd</span
+      >
+    </div>
+  </div>
+  <button
+    mat-raised-button
+    type="button"
+    color="primary"
+    class="btn btn--next"
+    (click)="nextMonth()"
+  >
+    &gt;&gt;
+  </button>
+  <button
+    mat-raised-button
+    type="button"
+    color="primary"
+    class="btn btn--clear"
+    (click)="clearCalendar()"
+  >
+    Wyczyść historię
+  </button>
+</div>

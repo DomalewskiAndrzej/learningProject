@@ -1,0 +1,32 @@
+<div class="container">
+  <form class="form" [formGroup]="exerciseForm">
+    <label>Podaj nazwę ćwiczenia</label>
+    <input
+      class="form__input"
+      type="text"
+      placeholder="Nazwa ćwiczenia"
+      formControlName="name"
+    />
+    <label>Podaj opis ćwiczenia</label>
+    <textarea
+      class="form__textarea"
+      type="text"
+      placeholder="Opis ćwiczenia"
+      formControlName="description"
+    ></textarea>
+  </form>
+  <div class="footer">
+    <button
+      class="footer__btn"
+      mat-raised-button
+      color="primary"
+      (click)="addExerciseFade()"
+    >
+      Wróć
+    </button>
+    <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+    <button mat-raised-button color="accent" (click)="saveExercise()">
+      Zapisz ćwiczenie
+    </button>
+  </div>
+</div>

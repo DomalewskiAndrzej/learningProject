@@ -1,0 +1,80 @@
+<div class="container">
+  <form [formGroup]="filterForm" class="container__select">
+    <div class="container__select--input">
+      <label>Wybierz składnik:</label>
+      <input
+        type="text"
+        placeholder="Składnik"
+        list="hints"
+        autocomplete="off"
+        formControlName="name"
+      />
+      <datalist id="hints">
+        <option
+          *ngFor="let element of datalist; let i = index"
+          value="{{ element }}"
+        ></option>
+      </datalist>
+    </div>
+    <div class="container__select--input">
+      <label>Waga w gramach:</label>
+      <input
+        type="number"
+        class="container__select--short"
+        placeholder="0"
+        formControlName="weight"
+      />
+    </div>
+  </form>
+  <div class="container__content">
+    <app-ingredient-details-presenter
+      *ngIf="filterMessage === 'Ten produkt jest dostępny!'"
+      [filterData]="filterData"
+      [filterWeight]="filterWeight"
+    ></app-ingredient-details-presenter>
+    <app-ingredient-newingredient-presenter
+      *ngIf="filterMessage === 'Ten produkt jest niedostępny!'"
+      [ingredientsNames]="datalist"
+      (addProduct)="addProduct($event)"
+    ></app-ingredient-newingredient-presenter>
+  </div>
+
+  <div class="container__info">
+    <div class="container__message">
+      <span
+        *ngIf="filterMessage"
+        class="container__message--red"
+        [ngClass]="
+          filterMessage === 'Ten produkt jest niedostępny!'
+            ? 'container__message--red'
+            : 'container__message--green'
+        "
+      >
+        {{ filterMessage }}
+      </span>
+    </div>
+    <div class="container__btns">
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/meal"
+        type="button"
+      >
+        Wyjdź
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="onSubmit()"
+        routerLink="/meal"
+        [disabled]="
+          filterMessage !== 'Ten produkt jest dostępny!' || !filterForm.valid
+        "
+        class="container__btns--margin"
+      >
+        Zapisz składnik
+      </button>
+    </div>
+  </div>
+</div>

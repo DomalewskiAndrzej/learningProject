@@ -1,0 +1,266 @@
+<div class="container" [ngClass]="{ 'container--flex': !calculatorFade }">
+  <div class="menu" [ngClass]="{ 'menu--flex': !calculatorFade }">
+    <div class="avatar">
+      <div class="avatar__box">
+        <img class="avatar__box--img" [src]="user.src" alt="avatar" />
+      </div>
+      <div class="avatar__box avatar__box--center">
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="changeAvatar()"
+        >
+          {{ !avatarFade ? "Zmień avatar" : "Potwierdź" }}
+        </button>
+      </div>
+      <div class="change-img" *ngIf="avatarFade">
+        <button class="change-img__btn" (click)="closeChangeAvatar()">
+          Zamknij
+        </button>
+        <img
+          src="https://i1.wp.com/pieskieszycie.pl/wp-content/uploads/2019/07/buldog-to-wymagajaca-rasa.jpg?fit=780%2C760&ssl=1"
+          alt="buldog"
+          class="change-img__picture"
+          (click)="changeImg($event)"
+        />
+        <img
+          src="https://m.innpoland.pl/f96bb3204b956eb8d96b412c4612a927,1500,0,0,0.webp"
+          alt="kot"
+          class="change-img__picture"
+          (click)="changeImg($event)"
+        />
+        <img
+          src="https://e.allegroimg.com/s1024/0c141f/6b74d722490690eebe91f0a7941e"
+          alt="york"
+          class="change-img__picture"
+          (click)="changeImg($event)"
+        />
+        <img
+          src="https://fajnepodroze.pl/wp-content/webp-express/webp-images/uploads/2020/10/jaszczurka-680x383.jpg.webp"
+          alt="jaszczurka"
+          class="change-img__picture"
+          (click)="changeImg($event)"
+        />
+      </div>
+    </div>
+    <div class="info">
+      <div class="box">
+        <span class="box__info">Hasło</span>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="box__info"
+          (click)="togglePasswordForm()"
+        >
+          Edytuj
+        </button>
+      </div>
+      <form [formGroup]="passwordForm" class="form" *ngIf="passwordFormFade">
+        <label>Podaj obecne hasło</label>
+        <input
+          type="password"
+          formControlName="oldPassword"
+          placeholder="Wpisz obecne hasło"
+        />
+        <label>Podaj nowe hasło - minimum 10 znaków</label>
+        <input
+          type="password"
+          formControlName="newPassword"
+          placeholder="Wpisz nowe hasło"
+        />
+        <label>Podaj ponownie nowe hasło</label>
+        <input
+          type="password"
+          formControlName="repeatedPassword"
+          placeholder="Wpisz ponownie nowe hasło"
+        />
+        <button
+          mat-raised-button
+          color="primary"
+          class="form__btn"
+          type="button"
+          (click)="submitPassword()"
+        >
+          Zapisz informacje
+        </button>
+      </form>
+      <div class="box">
+        <span class="box__info">Nick: {{ user.nick }}</span>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="box__info"
+          (click)="toggleNickForm()"
+        >
+          Edytuj
+        </button>
+      </div>
+      <form [formGroup]="nickForm" class="form" *ngIf="nickFormFade">
+        <label>Podaj nick - minimum 5 znaków</label>
+        <input type="text" formControlName="nick" placeholder="Wpisz nick" />
+        <button
+          mat-raised-button
+          color="primary"
+          class="form__btn"
+          type="button"
+          (click)="submitNick()"
+        >
+          Zapisz informacje
+        </button>
+      </form>
+      <div class="box">
+        <span class="box__info">E-mail: {{ user.email }}</span>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="box__info"
+          (click)="toggleEmailForm()"
+        >
+          Edytuj
+        </button>
+      </div>
+      <form [formGroup]="emailForm" class="form" *ngIf="emailFormFade">
+        <label>Podaj e-mail</label>
+        <input type="text" formControlName="email" placeholder="Wpisz e-mail" />
+        <button
+          mat-raised-button
+          color="primary"
+          class="form__btn"
+          type="button"
+          (click)="submitEmail()"
+        >
+          Zapisz informacje
+        </button>
+      </form>
+      <div class="box">
+        <span class="box__info"
+          >Dzienne zapotrzebowanie: {{ user.dailyKcal }} kcal</span
+        >
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="box__info"
+          (click)="toggleKcalForm()"
+        >
+          Edytuj
+        </button>
+      </div>
+      <form [formGroup]="kcalForm" class="form" *ngIf="kcalFormFade">
+        <label>Podaj zapotrzebowanie dzienne!</label>
+        <input
+          type="number"
+          placeholder="Wpisz kcal"
+          formControlName="dailyKcal"
+          (input)="calculationRealKcal()"
+        />
+        <span
+          >Nie wiesz ile wynosi?<span
+            class="form__question"
+            (click)="calculatorFading()"
+          >
+            {{ !calculatorFade ? "Skorzystaj z kalkulatora" : "Schowaj" }}</span
+          ></span
+        >
+        <label>Co chcesz zrobić ?</label>
+        <span class="form__select"
+          >Chcę schudnąć<input
+            type="radio"
+            value="schudnąć"
+            name="option"
+            formControlName="option"
+            (change)="calculationRealKcal()"
+        /></span>
+        <span class="form__select"
+          >Chcę utrzymać wagę<input
+            type="radio"
+            value="utrzymać"
+            name="option"
+            formControlName="option"
+        /></span>
+        <span class="form__select"
+          >Chcę przytyć<input
+            type="radio"
+            value="przytyć"
+            name="option"
+            formControlName="option"
+            (change)="calculationRealKcal()"
+        /></span>
+        <div
+          class="form__wanted-kcal"
+          *ngIf="
+            kcalForm.controls.option.valid &&
+            kcalForm.controls.option.value !== 'utrzymać'
+          "
+        >
+          <label
+            >Ile dziennie chcesz {{ kcalForm.controls.option.value }} w
+            kcal?</label
+          >
+          <input
+            type="number"
+            placeholder="Wpisz kcal"
+            formControlName="wantedKcal"
+            (input)="calculationRealKcal()"
+          />
+          <label
+            *ngIf="
+              kcalForm.controls.wantedKcal.valid &&
+              kcalForm.controls.dailyKcal.valid
+            "
+            >Dzienne zapotrzebowanie: {{ realKcal }}</label
+          >
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="form__btn"
+          type="button"
+          (click)="submitKcal()"
+        >
+          Zapisz informacje
+        </button>
+      </form>
+      <div class="box">
+        <span class="box__info">Aktualna waga</span>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="box__info"
+          (click)="toggleWeightForm()"
+        >
+          Podaj
+        </button>
+      </div>
+      <form
+        [formGroup]="userWeightForm"
+        class="form"
+        *ngIf="userWeightFormFade"
+      >
+        <label>Podaj obecną wagę</label>
+        <input
+          type="number"
+          placeholder="Wpisz obecną wagę"
+          formControlName="weight"
+        />
+        <button
+          mat-raised-button
+          color="primary"
+          class="form__btn"
+          type="button"
+          (click)="submitUserWeight()"
+        >
+          Zapisz informacje
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="calculator" *ngIf="calculatorFade">
+    <app-user-calculator-presenter></app-user-calculator-presenter>
+  </div>
+</div>

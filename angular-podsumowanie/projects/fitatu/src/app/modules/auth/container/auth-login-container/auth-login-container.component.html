@@ -1,0 +1,5 @@
+<app-auth-login-presenter
+  (login)="submitLogin($event)"
+  (signUp)="submitSignup($event)"
+  [errorMessage]="errorMessage$ | async"
+></app-auth-login-presenter>

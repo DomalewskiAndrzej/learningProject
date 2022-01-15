@@ -1,0 +1,54 @@
+<div class="container">
+  <h1 class="table__info--title" *ngIf="!trainings.length">
+    Nie posiadasz żadnych planów!
+  </h1>
+  <div class="table" *ngIf="trainings.length">
+    <div class="table__info" *ngFor="let training of trainings; let i = index">
+      <h1 class="table__info--title">Nazwa treningu: {{ training.title }}</h1>
+      <table mat-table [dataSource]="training.exercises">
+        <ng-container matColumnDef="exercises">
+          <mat-header-cell *matHeaderCellDef>Nazwa ćwiczenia</mat-header-cell>
+          <mat-cell *matCellDef="let exercises">
+            {{ exercises.exercise }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="series">
+          <mat-header-cell *matHeaderCellDef>Ilość serii</mat-header-cell>
+          <mat-cell *matCellDef="let exercises">{{
+            exercises.series
+          }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="rpe">
+          <mat-header-cell *matHeaderCellDef>Skala RPE</mat-header-cell>
+          <mat-cell *matCellDef="let exercises">{{ exercises.rpe }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="rest">
+          <mat-header-cell *matHeaderCellDef>Przerwy</mat-header-cell>
+          <mat-cell *matCellDef="let exercises"
+            >{{ exercises.rest }} sekund</mat-cell
+          >
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </table>
+    </div>
+  </div>
+  <div class="footer">
+    <button
+      class="footer__btns"
+      mat-raised-button
+      color="primary"
+      (click)="loadPath()"
+    >
+      {{ path ? "Twoje plany" : "Gotowe plany" }}
+    </button>
+    <button
+      class="footer__btns"
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/training/create']"
+    >
+      Stwórz plan
+    </button>
+  </div>
+</div>

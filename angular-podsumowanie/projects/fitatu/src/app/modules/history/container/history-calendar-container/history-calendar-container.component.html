@@ -1,0 +1,8 @@
+<app-history-calendar-presenter
+  [calendar]="calendar"
+  (info)="dayInfo($event)"
+  (previous)="previousMonth()"
+  (next)="nextMonth()"
+  [month]="month"
+  (clear)="clearCalendar()"
+></app-history-calendar-presenter>

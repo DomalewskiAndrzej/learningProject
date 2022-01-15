@@ -1,0 +1,23 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "module": {
+      "aliases": ["customModule"],
+      "description": "A blank schematic.",
+      "factory": "./module/index#module",
+      "schema": "./module/schema.json"
+    },
+    "start": {
+      "aliases": ["customStart"],
+      "description": "A blank schematic.",
+      "factory": "./start/index#start",
+      "schema": "./start/schema.json"
+    },
+    "container": {
+      "aliases": ["customContainer"],
+      "description": "A blank schematic.",
+      "factory": "./container/index#container",
+      "schema": "./container/schema.json"
+    }
+  }
+}

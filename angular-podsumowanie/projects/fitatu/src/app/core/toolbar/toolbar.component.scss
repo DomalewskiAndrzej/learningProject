@@ -1,0 +1,14 @@
+.toolbar {
+  background-color: #ffffff;
+  position: fixed;
+  z-index: 100;
+  &__spacer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    &-element {
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
+  }
+}

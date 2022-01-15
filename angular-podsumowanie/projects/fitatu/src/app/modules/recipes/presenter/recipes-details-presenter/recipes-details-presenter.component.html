@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="container__info" *ngIf="!recipe">
+    <h1>Nie wybrałeś żadnego przepisu!</h1>
+  </div>
+  <div class="container__info" *ngIf="recipe">
+    <div class="container__details">
+      <img
+        [src]="recipe.src"
+        [alt]="recipe.alt"
+        class="container__details--img"
+      />
+      <div class="container__description">
+        <h2 class="container__description--title">{{ recipe.title }}</h2>
+        <h4 class="container__description--title">Składniki:</h4>
+        <ul
+          class="container__description--info"
+          *ngFor="let ingredients of recipe.ingredients"
+        >
+          <li>
+            Nazwa składnika: {{ ingredients.name }}<br />
+            Waga: {{ ingredients.weight }} gram
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container__recipe">
+      <div>
+        <h2 class="container__description--title">Sposób przygotowania:</h2>
+        <ul
+          class="container__description--info"
+          *ngFor="let description of recipe.description"
+        >
+          <li>{{ description }}</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="container__description--title">Czas przygotowania:</h4>
+        <span class="container__description--info"
+          >Czas: {{ recipe.time }}</span
+        >
+        <h4 class="container__description--title">Ilość porcji:</h4>
+        <span class="container__description--info"
+          >Porcje: {{ recipe.portions }}</span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="container__back">
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      class="add__buttons--margin"
+      [routerLink]="['/recipes']"
+    >
+      Wróć
+    </button>
+  </div>
+</div>

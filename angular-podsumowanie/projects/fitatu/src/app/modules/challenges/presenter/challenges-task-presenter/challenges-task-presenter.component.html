@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="container__info">
+    <div *ngIf="!message">
+      <h1>Wyzwanie: {{ title }}</h1>
+      <p>Punkty: {{ task }}</p>
+      <h2>Twoja gablota:</h2>
+      <h3 *ngIf="!task">Nie posiadasz jeszcze żadnych trofeów!</h3>
+    </div>
+    <h2 *ngIf="message">{{ message }}</h2>
+  </div>
+  <div class="trophies" *ngIf="task">
+    <div title="Nagroda za 1 punkt" *ngIf="task > 0">
+      <img
+        src="https://polskipuchar.pl/img/main/offer_1_4.496.2.jpg"
+        alt="Brązowy medal"
+      />
+    </div>
+    <div title="Nagroda za 3 punkty" *ngIf="task > 2">
+      <img
+        src="https://polskipuchar.pl/img/main/offer_1_4.496.1.jpg"
+        alt="Srebrny medal"
+      />
+    </div>
+    <div title="Nagroda za 5 punktów" *ngIf="task > 4">
+      <img
+        src="https://polskipuchar.pl/img/main/offer_1_4.496.jpg"
+        alt="Złoty medal"
+      />
+    </div>
+    <div title="Nagroda za 10 punktów" *ngIf="task > 9">
+      <img
+        src="https://polskipuchar.pl/img/main/offer_1_1.201.2.jpg"
+        alt="Brązowy puchar"
+      />
+    </div>
+    <div title="Nagroda za 50 punktów" *ngIf="task > 49">
+      <img
+        src="https://polskipuchar.pl/img/main/offer_1_1.201.1.jpg"
+        alt="Srebrny puchar"
+      />
+    </div>
+    <div title="Nagroda za 100 punktów" *ngIf="task > 99">
+      <img
+        src="https://polskipuchar.pl/img/main/offer_1_1.200.jpg"
+        alt="Złoty puchar"
+      />
+    </div>
+  </div>
+  <div class="footer">
+    <button
+      mat-raised-button
+      color="primary"
+      class="footer__btn"
+      [routerLink]="['/challenges']"
+      type="button"
+    >
+      Wróć
+    </button>
+  </div>
+</div>

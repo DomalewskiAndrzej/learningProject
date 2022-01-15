@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Menu</h1>
+  <div class="container__info" *ngIf="meal">
+    <p>Udało Ci się utworzyć dzień z jedzenia!</p>
+    <p>Dzień: {{ user.dayNumber }}</p>
+    <p>Data: {{ dayDate }}</p>
+  </div>
+  <button
+    mat-raised-button
+    color="primary"
+    class="container__btn"
+    (click)="onCreateDay()"
+  >
+    {{ !meal ? "Dzień+" : "Utwórz posiłek" }}
+  </button>
+</div>

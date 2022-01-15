@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="container__chart" *ngIf="weightChart">
+    <h1>Historia wagi</h1>
+    <canvas
+      baseChart
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="'line'"
+    >
+    </canvas>
+  </div>
+  <h1 *ngIf="!weightChart">Nie posiadasz zapisanej histori wagi</h1>
+</div>

@@ -1,0 +1,86 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  position: absolute;
+  width: 5%;
+  text-align: center;
+  padding: 0;
+  &--previous {
+    left: -7%;
+  }
+  &--next {
+    right: -7%;
+  }
+  &--clear {
+    width: 10%;
+    right: -12%;
+    top: 7%;
+  }
+}
+.month {
+  position: absolute;
+  top: -5%;
+  left: 45%;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 5%;
+  &__header {
+    height: 10%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 1px;
+    margin-bottom: 1px;
+    .day-of-the-week {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px black;
+    }
+  }
+  &__cell {
+    height: 90%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-gap: 1px;
+    .day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px black;
+      &--colored {
+        background-color: rgba(0, 0, 0, 0.62);
+      }
+      &__number-of-day {
+        font-size: 1.5rem;
+      }
+      &__info {
+        font-size: 0.9rem;
+        &--details {
+          color: blue;
+          &:hover {
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

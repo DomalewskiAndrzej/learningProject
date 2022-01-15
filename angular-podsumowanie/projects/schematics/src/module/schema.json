@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "module",
+  "title": "first schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "default": "projects/fitatu/src/app/modules",
+      "visible": false,
+      "description": "The path at which to create the module!",
+      "x-prompt": "Where do you want to generate?"
+    },
+    "module": {
+      "type": "string",
+      "default": "module",
+      "description": "Name of module!",
+      "x-prompt": "What name of module do you want to have?"
+    },
+    "component": {
+      "type": "string",
+      "default": "component",
+      "description": "Name of component!",
+      "x-prompt": "What name of component do you want to have?"
+    },
+    "model": {
+      "type": "string",
+      "default": "model",
+      "description": "Name of model that will be used!",
+      "x-prompt": "What name of model do you want to have?"
+    },
+    "link": {
+      "type": "string",
+      "default": "https://ng-complete-course-by-me-default-rtdb.firebaseio.com/",
+      "description": "Name of url to API!",
+      "x-prompt": "Where is yours API?"
+    },
+    "oneActions": {
+      "type": "boolean",
+      "default": true,
+      "description": "Actions: addOne, updateOne, upsertOne & deleteOne",
+      "x-prompt": "Do you want to have addOne, updateOne, upsertOne & deleteOne?"
+    },
+    "manyActions": {
+      "type": "boolean",
+      "default": true,
+      "description": "Actions: addMany, updateMany, upsertMany & deleteMany",
+      "x-prompt": "Do you want to have addMany, updateMany, upsertMany & deleteMany?"
+    }
+  }
+}

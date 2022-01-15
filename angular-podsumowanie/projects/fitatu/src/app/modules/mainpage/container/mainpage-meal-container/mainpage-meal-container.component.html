@@ -1,0 +1,9 @@
+<app-mainpage-meal-presenter
+  [mealNumber]="mealNumber$ | async"
+  (saveMeal)="onSaveMeal($event)"
+  [dataSource]="dataSource"
+  (deleteIngredient)="deleteIngredient($event)"
+  (newWeight)="newWeight($event)"
+  (editIngredient)="editIngredient($event)"
+  [dailyKcal]="dailyKcal$ | async"
+></app-mainpage-meal-presenter>

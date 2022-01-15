@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "start",
+  "title": "first schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "default": "projects/fitatu/src/app/",
+      "visible": false,
+      "description": "The path at which to create the module!",
+      "x-prompt": "Where do you want to generate?"
+    },
+    "registerLink": {
+      "type": "string",
+      "default": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=",
+      "visible": false,
+      "description": "Link to send register request to API!",
+      "x-prompt": "Link to send register request to API!"
+    },
+    "loginLink": {
+      "type": "string",
+      "default": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=",
+      "visible": false,
+      "description": "Link to send login request to API!",
+      "x-prompt": "Link to send login request to API!"
+    },
+    "link": {
+      "type": "string",
+      "default": "https://ng-complete-course-by-me-default-rtdb.firebaseio.com/",
+      "visible": false,
+      "description": "Link to API!",
+      "x-prompt": "Link to API!"
+    }
+  }
+}

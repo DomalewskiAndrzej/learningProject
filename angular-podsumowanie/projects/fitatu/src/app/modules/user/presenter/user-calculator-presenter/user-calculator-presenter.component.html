@@ -1,0 +1,72 @@
+<div class="container">
+  <h1>Kalkulator - Całkowita przemiana materii(CPM)</h1>
+  <h2>Wzór Harrisa-Benedicta na podstawową przemianę materii (PPM/BMR)</h2>
+  <form [formGroup]="calculationForm" class="form">
+    <label>Płeć</label>
+    <div class="form__select">
+      <span>Mężczyzna</span
+      ><input
+        type="radio"
+        value="mezczyzna"
+        name="gender"
+        formControlName="gender"
+      />
+      <span>Kobieta</span
+      ><input
+        type="radio"
+        value="kobieta"
+        name="gender"
+        formControlName="gender"
+      />
+    </div>
+    <label>Masa ciała w kg</label>
+    <input type="number" formControlName="weight" placeholder="Wpisz wagę" />
+    <label>Wzrost w cm</label>
+    <input type="number" formControlName="height" placeholder="Wpisz wzrost" />
+    <label>Wiek</label>
+    <input type="number" formControlName="age" placeholder="Wpisz wiek" />
+    <label>Aktywność fizyczna</label>
+    <input
+      type="text"
+      formControlName="activity"
+      placeholder="Wybierz opcję"
+      list="activityList"
+    />
+    <datalist id="activityList">
+      <option value="Siedzący">
+        Jeśli wykonujesz minimalne ćwiczenia lub nie wykonujesz żadnych ćwiczeń.
+      </option>
+      <option value="Lekko aktywny">
+        Jeśli ćwiczysz lekko od jednego do trzech dni w tygodniu.
+      </option>
+      <option value="Umiarkowanie aktywny">
+        Jeśli ćwiczysz umiarkowanie od trzech do pięciu dni w tygodniu.
+      </option>
+      <option value="Bardzo aktywny">
+        Jeśli intensywnie ćwiczysz przez sześć do siedmiu dni w tygodniu.
+      </option>
+      <option value="Ekstra aktywny">
+        Jeśli bardzo ciężko ćwiczysz od 6-7 dni w tygodniu lub wykonujesz pracę
+        fizyczną.
+      </option>
+    </datalist>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="submitCalculation()"
+    >
+      Oblicz
+    </button>
+    <span class="form__kcal" *ngIf="kcal"
+      >Twoje zapotrzebowanie dzienne wynosi:
+      {{ kcal | number: "1.0-2" }} kcal.</span
+    >
+  </form>
+  <h3>
+    Pamiętaj, że realne zapotrzebowanie dzienne może być inne od tego
+    wyliczonego, ponieważ każdy organizm się różni. Wartość wyliczona jest tylko
+    szacowanym zapotrzebowaniem dziennym!
+  </h3>
+</div>

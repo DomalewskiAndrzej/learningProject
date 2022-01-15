@@ -1,0 +1,6 @@
+<app-meals-details-presenter
+  [meals]="meals | async"
+  (deleteMeal)="onDeleteMeal($event)"
+  (saveDay)="onSaveDay($event)"
+  [dailyKcal]="dailyKcal | async"
+></app-meals-details-presenter>

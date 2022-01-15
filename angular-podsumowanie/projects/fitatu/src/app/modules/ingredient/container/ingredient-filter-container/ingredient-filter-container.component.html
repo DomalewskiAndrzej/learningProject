@@ -1,0 +1,11 @@
+<app-ingredient-filter-presenter
+  (filterName)="filter($event)"
+  (submitForm)="onSubmit()"
+  (newProduct)="addProduct($event)"
+  [filterMessage]="filterMessage"
+  [datalist]="datalist$ | async"
+  [filterData]="filterData"
+  [filterWeight]="filterWeight"
+>
+  ></app-ingredient-filter-presenter
+>

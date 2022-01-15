@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="create">
+    <form class="form" [formGroup]="createForm">
+      <div class="form__add">
+        <button
+          class="footer__btns--margin"
+          mat-raised-button
+          color="primary"
+          (click)="addExerciseControls()"
+        >
+          Dodaj ćwiczenie
+        </button>
+        <button
+          class="footer__btns--margin"
+          mat-raised-button
+          color="accent"
+          (click)="removeExerciseControls()"
+        >
+          Usuń ćwiczenie
+        </button>
+      </div>
+      <div class="create__title">
+        <label class="create__title--margin"
+          >Podaj nazwę planu treningowego</label
+        >
+        <input type="text" formControlName="title" placeholder="Nazwa planu" />
+      </div>
+      <div class="form__body">
+        <div
+          class="form__body--space"
+          formArrayName="exercises"
+          *ngFor="
+            let exerciseControl of controlsExercises.controls;
+            let i = index
+          "
+        >
+          <div class="form__controls" [formGroupName]="i">
+            <label>Podaj nazwę ćwiczenia</label>
+            <input
+              type="text"
+              formControlName="exercise"
+              list="exerciseList"
+              placeholder="Nazwa ćwiczenia"
+            />
+            <datalist id="exerciseList" *ngFor="let exercise of exercises">
+              <option [value]="exercise.name">
+                {{ exercise.description }}
+              </option>
+            </datalist>
+            <label>Podaj ilość serii</label>
+            <input
+              type="text"
+              formControlName="series"
+              placeholder="Ilość serii"
+            />
+            <label
+              title="Skala RPE określa jak ciężkie powinno być ćwiczenie, które wykonujemy, względem naszych sił, oczywiście przy zachowaniu poprawnej techniki!"
+              >Podaj skalę RPE</label
+            >
+            <input
+              type="text"
+              formControlName="rpe"
+              list="rpeList"
+              placeholder="Skala RPE"
+            />
+            <datalist id="rpeList">
+              <option value="10">
+                Nie dało się wykonać więcej powtórzeń, ani zwiększyć obciążenia
+              </option>
+              <option value="9.5">
+                Nie dało się wykonać więcej powtórzeń, ale można minimalnie
+                zwiększyć obciążenia
+              </option>
+              <option value="9">
+                Można było wykonać 1 dodatkowe powtórzenie
+              </option>
+              <option value="8.5">
+                Na pewno można było wykonać 1 dodatkowe powtórzenia, szansa na 2
+              </option>
+              <option value="8">
+                Można było wykonać 2 dodatkowe powtórzenia
+              </option>
+              <option value="7.5">
+                Na pewno można było wykonać 2 dodatkowe powtórzenia, szansa na 3
+              </option>
+              <option value="7">
+                Można było wykonać 3 dodatkowe powtórzenia
+              </option>
+              <option value="5-6">
+                Można było wykonać 4 do 6 dodatkowych powtórzeń
+              </option>
+              <option value="1-4">Bardzo niski poziom wysiłku</option>
+            </datalist>
+            <label>Podaj czas przerwy między seriami w sekundach</label>
+            <input
+              type="text"
+              formControlName="rest"
+              placeholder="Czas przerwy"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <div class="footer__add">
+      <button
+        class="footer__add--btn"
+        mat-raised-button
+        color="accent"
+        (click)="saveTraining()"
+      >
+        Zapisz plan
+      </button>
+      <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+      <p class="footer__add--text">Nie ma Twojego ćwiczenia?</p>
+      <span class="footer__add--click" (click)="addExerciseFade()"
+        >Dodaj je!</span
+      >
+    </div>
+    <div class="footer__btns">
+      <button
+        class="footer__btns--margin"
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/training/custom']"
+      >
+        Twoje plany
+      </button>
+      <button
+        class="footer__btns--margin"
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/training/plans']"
+      >
+        Gotowe plany
+      </button>
+    </div>
+  </div>
+</div>
+<app-training-add-presenter
+  *ngIf="exerciseFade"
+  (exerciseFade)="addExerciseFade()"
+  (exercise)="addExercise($event)"
+></app-training-add-presenter>

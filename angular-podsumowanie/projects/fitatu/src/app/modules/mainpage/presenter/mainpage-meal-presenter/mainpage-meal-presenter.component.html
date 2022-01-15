@@ -1,0 +1,138 @@
+<div class="table">
+  <div>
+    <div class="info">
+      <label>Posiłek numer: {{ mealNumber }}</label>
+      <div class="info__form">
+        <label>Wpisz nazwę posiłku</label>
+        <form [formGroup]="mealNameForm" class="">
+          <input
+            type="text"
+            placeholder="Nazwa posiłku"
+            formControlName="name"
+          />
+        </form>
+      </div>
+      <div class="info__btns">
+        <button
+          class="info__btns--space"
+          mat-raised-button
+          color="primary"
+          [routerLink]="['/filter']"
+        >
+          Składnik+
+        </button>
+        <button
+          class="info__btns--space"
+          mat-raised-button
+          color="primary"
+          (click)="onSaveMeal()"
+          [disabled]="!mealNameForm.valid || dataSource.data.length == 0"
+        >
+          Zapisz posiłek
+        </button>
+        <button
+          class="info__btns--space"
+          mat-raised-button
+          color="primary"
+          [routerLink]="['/meals']"
+        >
+          Pokaż Posiłki
+        </button>
+      </div>
+    </div>
+    <mat-table [dataSource]="dataSource" class="table__item--info">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Nazwa produktu</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            mat-raised-button
+            color="primary"
+            class="table__item--btn"
+            (click)="onDelete(element)"
+          >
+            Usuń
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            class="table__item--btn"
+            (click)="onEdit(element)"
+          >
+            {{
+              this.variable[this.dataSource.data.indexOf(element)]
+                ? "Potwierdź"
+                : "Edytuj"
+            }}
+          </button>
+          {{ element.name }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef>Waga</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.amount * 100 | number: "1.0-2" }} g
+          <form
+            [formGroup]="weightForm"
+            class="table__new-weight"
+            *ngIf="
+              this.variable[this.dataSource.data.indexOf(element)] &&
+              this.variable[this.dataSource.data.indexOf(element)] !== undefined
+            "
+          >
+            <input
+              type="number"
+              class="table__new-weight--data"
+              placeholder="0"
+              formControlName="weight"
+              (input)="editedWeight()"
+            />
+          </form>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="b">
+        <mat-header-cell *matHeaderCellDef>B</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.macro.b * element.amount | number: "1.0-2" }} g
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="t">
+        <mat-header-cell *matHeaderCellDef>T</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.macro.t * element.amount | number: "1.0-2" }} g
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="w">
+        <mat-header-cell *matHeaderCellDef>W</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.macro.w * element.amount | number: "1.0-2" }} g
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="kcal">
+        <mat-header-cell *matHeaderCellDef>Kalorie</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.macro.kcal * element.amount | number: "1.0-2" }} kcal
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+  <div class="macro" *ngIf="dataSource.data.length">
+    <p class="macro__info">
+      Twoje zapotrzebowanie dzienne: {{ dailyKcal | number: "1.0-2" }}
+    </p>
+    <p class="macro__info">
+      Pozostało: {{ dailyKcal - macro.kcal | number: "1.0-2" }}
+    </p>
+    <p class="macro__info">Suma macro:</p>
+    <p class="macro__info">B: {{ macro.b | number: "1.0-2" }} g</p>
+    <p class="macro__info">T: {{ macro.t | number: "1.0-2" }} g</p>
+    <p class="macro__info">
+      W:
+      {{ macro.w | number: "1.0-2" }} g
+    </p>
+    <p class="macro__info">
+      Suma Kcal: {{ macro.kcal | number: "1.0-2" }} kcal
+    </p>
+  </div>
+</div>

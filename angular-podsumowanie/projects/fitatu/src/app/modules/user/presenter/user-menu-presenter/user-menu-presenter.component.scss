@@ -1,0 +1,140 @@
+:host {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  margin: auto;
+}
+
+.change-img {
+  width: 40%;
+  height: 90%;
+  bottom: -100%;
+  right: 0;
+  position: absolute;
+  border: 1px solid black;
+  background-color: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 5%;
+  justify-content: space-between;
+  overflow-y: auto;
+  &__picture {
+    width: 50px;
+    height: 50px;
+  }
+  &__btn {
+    width: 100%;
+    height: 10%;
+    background-color: #fff;
+    border: none;
+  }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  &--flex {
+    border: none;
+    justify-content: center;
+  }
+  .menu {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid black;
+    &--flex {
+      border: 1px solid black;
+    }
+    .avatar {
+      height: 20%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      align-items: center;
+      &__box {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: left;
+        &--center {
+          align-items: center;
+          justify-content: center;
+          border: none;
+        }
+        &--img {
+          margin: 3%;
+          border: 1px solid black;
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+    .info {
+      height: 75%;
+      width: 100%;
+      overflow-y: auto;
+      .box {
+        width: 100%;
+        height: 5%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        margin: 2% 0;
+        &__info {
+          display: flex;
+          margin: 0 2%;
+          font-size: 1.2rem;
+        }
+      }
+      .form {
+        margin-left: 3%;
+        display: flex;
+        flex-direction: column;
+
+        &__question {
+          color: blue;
+          font-weight: 400;
+          text-decoration: underline;
+          &:hover {
+            font-weight: 500;
+            cursor: pointer;
+          }
+        }
+
+        &__select {
+          margin-top: 1%;
+          display: flex;
+          justify-content: space-between;
+          width: 70%;
+          font-size: 1rem;
+        }
+        &__wanted-kcal {
+          margin: 1% 0;
+          display: flex;
+          flex-direction: column;
+        }
+        &__btn {
+          margin-top: 2%;
+          width: 40%;
+        }
+      }
+    }
+    .calculator {
+      width: 55%;
+      height: 100%;
+    }
+  }
+}
+
+input {
+  width: 40%;
+}

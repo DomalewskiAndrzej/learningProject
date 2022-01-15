@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Wyzwania</h1>
+  <button
+    mat-raised-button
+    color="primary"
+    class="container__btn"
+    [routerLink]="['task']"
+    (click)="taskReview('diet')"
+    type="button"
+  >
+    Prowadź dietę
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="container__btn"
+    [routerLink]="['task']"
+    (click)="taskReview('weight')"
+    type="button"
+  >
+    Waż się
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="container__btn"
+    [routerLink]="['task']"
+    (click)="taskReview('recipes')"
+    type="button"
+  >
+    Dodawaj przepisy
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="container__btn"
+    [routerLink]="['task']"
+    (click)="taskReview('training')"
+    type="button"
+  >
+    Twórz plany treningowe
+  </button>
+</div>

@@ -1,0 +1,49 @@
+<label>Informacje żywieniowe</label>
+<div class="table">
+  <table mat-table [dataSource]="dataSource" class="table__item--info">
+    <ng-container matColumnDef="b">
+      <th mat-header-cell *matHeaderCellDef>B</th>
+      <td mat-cell *matCellDef="let element">{{ element.macro.b + " g" }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="t">
+      <th mat-header-cell *matHeaderCellDef>T</th>
+      <td mat-cell *matCellDef="let element">{{ element.macro.t + " g" }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="w">
+      <th mat-header-cell *matHeaderCellDef>W</th>
+      <td mat-cell *matCellDef="let element">{{ element.macro.w + " g" }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="kcal">
+      <th mat-header-cell *matHeaderCellDef>Kcal</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.macro.kcal + " kcal" }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div
+    class="table__information"
+    *ngFor="let ingredient of dataSource; let i = index"
+  >
+    <label>Macro i kcal przy obecnej wadze</label>
+    <span class="table__information--text"
+      >B: {{ ingredient.macro.b * filterWeight | number: "1.0-2" }} g</span
+    >
+    <span class="table__information--text"
+      >T: {{ ingredient.macro.t * filterWeight | number: "1.0-2" }} g</span
+    >
+    <span class="table__information--text"
+      >W: {{ ingredient.macro.w * filterWeight | number: "1.0-2" }} g</span
+    >
+    <span class="table__information--text"
+      >Kcal:
+      {{ ingredient.macro.kcal * filterWeight | number: "1.0-2" }} kcal</span
+    >
+  </div>
+</div>

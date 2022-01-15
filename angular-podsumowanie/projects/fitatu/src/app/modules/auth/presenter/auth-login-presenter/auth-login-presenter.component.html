@@ -1,0 +1,41 @@
+<div class="container">
+  <form
+    [formGroup]="loginForm"
+    class="form"
+    [ngClass]="{ 'form--margin': signUpFade }"
+  >
+    <h1 class="container__header">Logowanie</h1>
+    <div class="form__info">
+      <label>Podaj e-mail</label>
+      <input type="text" formControlName="email" placeholder="Wpisz e-mail" />
+      <label>Podaj hasło</label>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Wpisz hasło"
+      />
+    </div>
+    <div class="form__box">
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="submitLogin()"
+      >
+        Zaloguj się
+      </button>
+      <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+    </div>
+    <span class="form__sign-up"
+      >Nie masz jeszcze konta?
+      <p class="form__sign-up--blue" (click)="signUpFading()">
+        {{ !signUpFade ? "Zarejestruj się" : "Powrót" }}
+      </p></span
+    >
+  </form>
+  <div class="container__sign-up" *ngIf="signUpFade">
+    <app-auth-sign-up-presenter
+      (signup)="submitSignup($event)"
+    ></app-auth-sign-up-presenter>
+  </div>
+</div>

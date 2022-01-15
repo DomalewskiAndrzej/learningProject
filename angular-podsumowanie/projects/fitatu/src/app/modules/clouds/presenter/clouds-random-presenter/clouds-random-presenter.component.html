@@ -1,0 +1,10 @@
+<div
+  class="container"
+  *ngIf="toggle"
+  [ngStyle]="{ top: height, left: position }"
+  (click)="onToggle()"
+>
+  <h2 class="container__title">Notatka motywacyjna:</h2>
+  <span class="container__text">{{ description }}</span>
+</div>
+<ng-content></ng-content>

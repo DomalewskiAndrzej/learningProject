@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="container--flex">
+    <div class="container__back">
+      <div class="container__back--info">
+        <button
+          mat-raised-button
+          color="primary"
+          class="container__back--info-element"
+          routerLink="/meal"
+        >
+          Wróć
+        </button>
+        <h1 class="container__back--info-element" *ngIf="message">
+          {{ message }}
+        </h1>
+      </div>
+      <div class="container__back--save">
+        <button
+          mat-raised-button
+          color="primary"
+          class="container__back--save-btn"
+          [routerLink]="['/history']"
+        >
+          Pokaż dni z jedzenia
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="container__back--save-btn"
+          (click)="onSaveDay()"
+          [disabled]="message || !dayNameForm.valid"
+        >
+          Zapisz dzień z jedzenia
+        </button>
+        <form [formGroup]="dayNameForm" class="container__back--save-form">
+          <label>Wpisz nazwę dnia z jedzenia</label>
+          <input
+            type="text"
+            placeholder="Nazwa dnia z jedzenia"
+            formControlName="name"
+          />
+        </form>
+      </div>
+    </div>
+    <div *ngFor="let meal of meals; let i = index">
+      <div class="container__info" *ngIf="!message">
+        <label class="container__info-text"
+          >Posiłek numer:
+          <span [ngStyle]="{ 'font-size': '20px' }">{{ i + 1 }}</span></label
+        >
+        <button
+          mat-raised-button
+          color="accent"
+          class="container__info-btn"
+          (click)="onDelete(meal)"
+        >
+          Usuń
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          class="container__info-btn"
+          (click)="onMealFade(meal)"
+        >
+          Szczegóły
+        </button>
+        <label
+          >Nazwa posiłku:
+          <span [ngStyle]="{ 'font-size': '20px' }">{{
+            meal.mealName
+          }}</span></label
+        >
+      </div>
+      <div
+        class="table"
+        *ngIf="
+          variable[meals.indexOf(meal)] &&
+          variable[meals.indexOf(meal)] !== undefined
+        "
+      >
+        <table mat-table [dataSource]="meal.meal">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Nazwa produktu</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef>Waga</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+              >{{ element.amount * 100 | number: "1.0-2" }} g</mat-cell
+            >
+          </ng-container>
+          <ng-container matColumnDef="b">
+            <mat-header-cell *matHeaderCellDef>B</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+              >{{
+                element.macro.b * element.amount | number: "1.0-2"
+              }}
+              g</mat-cell
+            >
+          </ng-container>
+          <ng-container matColumnDef="t">
+            <mat-header-cell *matHeaderCellDef>T</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+              >{{
+                element.macro.t * element.amount | number: "1.0-2"
+              }}
+              g</mat-cell
+            >
+          </ng-container>
+          <ng-container matColumnDef="w">
+            <mat-header-cell *matHeaderCellDef>W</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+              >{{
+                element.macro.w * element.amount | number: "1.0-2"
+              }}
+              g</mat-cell
+            >
+          </ng-container>
+          <ng-container matColumnDef="kcal">
+            <mat-header-cell *matHeaderCellDef>Kalorie</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+              >{{
+                element.macro.kcal * element.amount | number: "1.0-2"
+              }}
+              kcal</mat-cell
+            >
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </table>
+        <div class="table__macro">
+          <span class="table__macro--info"
+            >B: {{ meal.macro.b | number: "1.0-2" }}g</span
+          >
+          <span class="table__macro--info"
+            >T: {{ meal.macro.t | number: "1.0-2" }}g</span
+          >
+          <span class="table__macro--info">
+            W:
+            {{ meal.macro.w | number: "1.0-2" }}g
+          </span>
+          <span class="table__macro--info"
+            >Kcal: {{ meal.macro.kcal | number: "1.0-2" }}kcal</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="macro" *ngIf="meals.length">
+    <p class="macro__info">
+      Twoje zapotrzebowanie dzienne: {{ dailyKcal | number: "1.0-2" }}
+    </p>
+    <p class="macro__info">
+      Pozostało: {{ dailyKcal - macro.kcal | number: "1.0-2" }}
+    </p>
+    <p class="macro__info">Suma macro:</p>
+    <p class="macro__info">B: {{ macro.b | number: "1.0-2" }} g</p>
+    <p class="macro__info">T: {{ macro.t | number: "1.0-2" }} g</p>
+    <p class="macro__info">
+      W:
+      {{ macro.w | number: "1.0-2" }} g
+    </p>
+    <p class="macro__info">
+      Suma Kcal: {{ macro.kcal | number: "1.0-2" }} kcal
+    </p>
+  </div>
+</div>

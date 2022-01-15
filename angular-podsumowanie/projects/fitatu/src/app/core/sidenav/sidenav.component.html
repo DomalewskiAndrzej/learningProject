@@ -1,0 +1,54 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer
+    class="sidenav"
+    mode="side"
+    opened
+    (mouseenter)="onToggleMenu()"
+    (mouseleave)="onToggleMenu()"
+  >
+    <mat-nav-list>
+      <div>
+        <div class="spacer"></div>
+        <mat-list-item [routerLink]="['']">
+          <mat-icon matListIcon>home</mat-icon>
+          <a matLine *ngIf="expanded">Strona główna</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/meals']">
+          <mat-icon matListIcon>description</mat-icon>
+          <a matLine *ngIf="expanded">Pokaż posiłki</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/history']">
+          <mat-icon matListIcon>calendar_today</mat-icon>
+          <a matLine *ngIf="expanded">Kalendarz</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/database']">
+          <mat-icon matListIcon>account_balance</mat-icon>
+          <a matLine *ngIf="expanded">Baza danych</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/chart']">
+          <mat-icon matListIcon>show_chart</mat-icon>
+          <a matLine *ngIf="expanded">Wykres</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/recipes']">
+          <mat-icon matListIcon>assignment</mat-icon>
+          <a matLine *ngIf="expanded">Przepisy</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/training']">
+          <mat-icon matListIcon>note_add</mat-icon>
+          <a matLine *ngIf="expanded">Plany treningowe</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/challenges']">
+          <mat-icon matListIcon>work_outline</mat-icon>
+          <a matLine *ngIf="expanded">Wyzwania</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/user']">
+          <mat-icon matListIcon>account_circle</mat-icon>
+          <a matLine *ngIf="expanded">Użytkownik</a>
+        </mat-list-item>
+      </div>
+    </mat-nav-list>
+  </mat-drawer>
+  <div class="sidenav-content">
+    <ng-content></ng-content>
+  </div>
+</mat-drawer-container>

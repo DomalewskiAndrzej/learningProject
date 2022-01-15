@@ -1,0 +1,49 @@
+<div class="menu">
+  <form [formGroup]="newIngredientForm" class="menu__add">
+    <label>Podaj nazwę składnika</label>
+    <input
+      type="text"
+      placeholder="Nazwa składnika"
+      class="menu__add--element"
+      formControlName="name"
+    />
+    <label>Podaj ilość Białka</label>
+    <input
+      type="number"
+      placeholder="Białko"
+      class="menu__add--element"
+      formControlName="b"
+    />
+    <label>Podaj ilość Tłuszczy</label>
+    <input
+      type="number"
+      placeholder="Tłuszcze"
+      class="menu__add--element"
+      formControlName="t"
+    />
+    <label>Podaj ilość Węglowodanów</label>
+    <input
+      type="number"
+      placeholder="Węglowodany"
+      class="menu__add--element"
+      formControlName="w"
+    />
+    <label>Podaj ilość Kcal</label>
+    <input
+      type="number"
+      placeholder="Kalorie"
+      class="menu__add--element"
+      formControlName="kcal"
+    />
+    <button
+      mat-raised-button
+      color="accent"
+      class="menu__add--btn"
+      [disabled]="!newIngredientForm.valid"
+      type="button"
+      (click)="onSubmitAdd()"
+    >
+      Dodaj produkt
+    </button>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "module",
+  "title": "first schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "default": "projects/fitatu/src/app/modules",
+      "visible": false,
+      "description": "The path at which to create the module!",
+      "x-prompt": "Where do you want to generate?"
+    },
+    "module": {
+      "type": "string",
+      "default": "module",
+      "description": "Name of module!",
+      "x-prompt": "What name of module do you want to have?"
+    },
+    "component": {
+      "type": "string",
+      "default": "component",
+      "description": "Name of component!",
+      "x-prompt": "What name of component do you want to have?"
+    }
+  }
+}
