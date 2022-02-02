@@ -8,6 +8,7 @@
         list="hints"
         autocomplete="off"
         formControlName="name"
+        test-data="input-ingredient-name"
       />
       <datalist id="hints">
         <option
@@ -23,6 +24,7 @@
         class="container__select--short"
         placeholder="0"
         formControlName="weight"
+        test-data="input-ingredient-weight"
       />
     </div>
   </form>
@@ -59,6 +61,7 @@
         color="primary"
         routerLink="/meal"
         type="button"
+        test-data="button-come-back"
       >
         Wyjdź
       </button>
@@ -72,6 +75,7 @@
           filterMessage !== 'Ten produkt jest dostępny!' || !filterForm.valid
         "
         class="container__btns--margin"
+        test-data="button-save-ingredient"
       >
         Zapisz składnik
       </button>

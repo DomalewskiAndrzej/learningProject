@@ -7,12 +7,18 @@
     <h1 class="container__header">Logowanie</h1>
     <div class="form__info">
       <label>Podaj e-mail</label>
-      <input type="text" formControlName="email" placeholder="Wpisz e-mail" />
+      <input
+        type="text"
+        formControlName="email"
+        placeholder="Wpisz e-mail"
+        test-data="email-input"
+      />
       <label>Podaj hasło</label>
       <input
         type="password"
         formControlName="password"
         placeholder="Wpisz hasło"
+        test-data="password-input"
       />
     </div>
     <div class="form__box">
@@ -21,6 +27,7 @@
         color="primary"
         type="button"
         (click)="submitLogin()"
+        test-data="submit-button-login"
       >
         Zaloguj się
       </button>

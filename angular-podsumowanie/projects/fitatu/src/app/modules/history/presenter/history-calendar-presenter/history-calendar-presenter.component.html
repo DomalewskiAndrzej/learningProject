@@ -33,6 +33,7 @@
         class="day__info day__info--details"
         (click)="dayInfo(i)"
         *ngIf="element.message == 'Dostępny dzień'"
+        test-data="span-day-details"
         >Podgląd</span
       >
     </div>
@@ -52,6 +53,7 @@
     color="primary"
     class="btn btn--clear"
     (click)="clearCalendar()"
+    test-data="calendar-history-clear"
   >
     Wyczyść historię
   </button>

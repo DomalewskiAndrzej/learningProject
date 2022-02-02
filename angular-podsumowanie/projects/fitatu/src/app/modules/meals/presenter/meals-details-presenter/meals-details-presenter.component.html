@@ -7,6 +7,7 @@
           color="primary"
           class="container__back--info-element"
           routerLink="/meal"
+          test-data="button-come-back"
         >
           Wróć
         </button>
@@ -20,6 +21,7 @@
           color="primary"
           class="container__back--save-btn"
           [routerLink]="['/history']"
+          test-data="button-days-show"
         >
           Pokaż dni z jedzenia
         </button>
@@ -29,6 +31,7 @@
           class="container__back--save-btn"
           (click)="onSaveDay()"
           [disabled]="message || !dayNameForm.valid"
+          test-data="button-day-create"
         >
           Zapisz dzień z jedzenia
         </button>
@@ -38,11 +41,15 @@
             type="text"
             placeholder="Nazwa dnia z jedzenia"
             formControlName="name"
+            test-data="input-day-name"
           />
         </form>
       </div>
     </div>
-    <div *ngFor="let meal of meals; let i = index">
+    <div
+      *ngFor="let meal of meals; let i = index"
+      test-data="container-for-meals"
+    >
       <div class="container__info" *ngIf="!message">
         <label class="container__info-text"
           >Posiłek numer:
@@ -53,6 +60,7 @@
           color="accent"
           class="container__info-btn"
           (click)="onDelete(meal)"
+          test-data="button-meal-delete"
         >
           Usuń
         </button>
@@ -61,6 +69,7 @@
           color="accent"
           class="container__info-btn"
           (click)="onMealFade(meal)"
+          test-data="button-meal-details"
         >
           Szczegóły
         </button>

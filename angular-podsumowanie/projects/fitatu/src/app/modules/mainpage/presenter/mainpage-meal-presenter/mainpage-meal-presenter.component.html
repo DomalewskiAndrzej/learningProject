@@ -9,6 +9,7 @@
             type="text"
             placeholder="Nazwa posiłku"
             formControlName="name"
+            test-data="input-meal-name"
           />
         </form>
       </div>
@@ -18,6 +19,7 @@
           mat-raised-button
           color="primary"
           [routerLink]="['/filter']"
+          test-data="button-add-ingredient"
         >
           Składnik+
         </button>
@@ -27,6 +29,7 @@
           color="primary"
           (click)="onSaveMeal()"
           [disabled]="!mealNameForm.valid || dataSource.data.length == 0"
+          test-data="button-save-meal"
         >
           Zapisz posiłek
         </button>
@@ -35,6 +38,7 @@
           mat-raised-button
           color="primary"
           [routerLink]="['/meals']"
+          test-data="button-show-meals"
         >
           Pokaż Posiłki
         </button>
