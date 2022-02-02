@@ -1,0 +1,314 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "fitatu": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/fitatu",
+      "sourceRoot": "projects/fitatu/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "allowedCommonJsDependencies": ["lodash"],
+            "outputPath": "dist/fitatu/browser",
+            "index": "projects/fitatu/src/index.html",
+            "main": "projects/fitatu/src/main.ts",
+            "polyfills": "projects/fitatu/src/polyfills.ts",
+            "tsConfig": "projects/fitatu/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/fitatu/src/favicon.ico",
+              "projects/fitatu/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "projects/fitatu/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/fitatu/src/environments/environment.ts",
+                  "with": "projects/fitatu/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "fitatu:build:production"
+            },
+            "development": {
+              "browserTarget": "fitatu:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fitatu:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fitatu/src/test.ts",
+            "polyfills": "projects/fitatu/src/polyfills.ts",
+            "tsConfig": "projects/fitatu/tsconfig.spec.json",
+            "karmaConfig": "projects/fitatu/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/fitatu/src/favicon.ico",
+              "projects/fitatu/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "projects/fitatu/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/fitatu/server",
+            "main": "projects/fitatu/server.ts",
+            "tsConfig": "projects/fitatu/tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/fitatu/src/environments/environment.ts",
+                  "with": "projects/fitatu/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "app-shell": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fitatu:build:production",
+              "serverTarget": "fitatu:server:production"
+            },
+            "development": {
+              "browserTarget": "fitatu:build:development",
+              "serverTarget": "fitatu:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/fitatu/**/*.ts",
+              "projects/fitatu/**/*.html"
+            ]
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "fitatu:build:development",
+              "serverTarget": "fitatu:server:development"
+            },
+            "production": {
+              "browserTarget": "fitatu:build:production",
+              "serverTarget": "fitatu:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fitatu:build:production",
+              "serverTarget": "fitatu:server:production"
+            },
+            "development": {
+              "browserTarget": "fitatu:build:development",
+              "serverTarget": "fitatu:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "project": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/project",
+      "sourceRoot": "projects/project/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/project",
+            "index": "projects/project/src/index.html",
+            "main": "projects/project/src/main.ts",
+            "polyfills": "projects/project/src/polyfills.ts",
+            "tsConfig": "projects/project/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/project/src/favicon.ico",
+              "projects/project/src/assets"
+            ],
+            "styles": ["projects/project/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/project/src/environments/environment.ts",
+                  "with": "projects/project/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "project:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "project:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "project:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/project/src/test.ts",
+            "polyfills": "projects/project/src/polyfills.ts",
+            "tsConfig": "projects/project/tsconfig.spec.json",
+            "karmaConfig": "projects/project/karma.conf.js",
+            "assets": [
+              "projects/project/src/favicon.ico",
+              "projects/project/src/assets"
+            ],
+            "styles": ["projects/project/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/project/**/*.ts",
+              "projects/project/**/*.html"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/project/e2e/protractor.conf.js",
+            "devServerTarget": "project:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "project:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "defaultProject": "fitatu"
+  }
+}
